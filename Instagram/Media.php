@@ -206,6 +206,26 @@ class Media extends \Instagram\Core\BaseObjectAbstract {
     }
 
     /**
+     * Create new comment
+     *
+     * @param string $text
+     *
+     * @return mixed
+     */
+    public function postComment( $text ) {
+        return $this->proxy->postMediaComment( $this->getApiId(), $text );
+    }
+
+    /**
+     * @param string $comment_id
+     *
+     * @return Core\StdClass
+     */
+    public function deleteComment( $comment_id ) {
+        return $this->proxy->deleteComment( $this->getApiId(), $comment_id );
+    }
+
+    /**
      * Get the media filter
      *
      * @return string

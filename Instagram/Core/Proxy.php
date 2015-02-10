@@ -230,6 +230,38 @@ class Proxy {
     }
 
     /**
+     * @param string $id Media ID
+     * @param string $text
+     *
+     * @return mixed
+     * @throws ApiAuthException
+     * @throws ApiException
+     */
+    public function postMediaComment( $id, $text ) {
+        $response = $this->apiCall(
+            'post',
+            sprintf( '%s/media/%s/comments', $this->api_url, $id ),
+            array('text' => $text)
+        );
+        return $response->getRawData();
+    }
+
+
+    /**
+     * Delete a comment
+     *
+     * @param string $media_id Media ID to unlike
+     * @return StdClass Returns the status
+     * @access public
+     */
+    public function deleteComment( $media_id, $comment_id ) {
+        $this->apiCall(
+            'delete',
+            $this->api_url . sprintf( '/media/%s/comments/%s', $media_id, $comment_id )
+        );
+    }
+
+    /**
      * Get media likes
      * 
      * @param string $id Media ID
